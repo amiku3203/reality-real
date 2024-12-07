@@ -14,7 +14,7 @@ const Awards = () => {
 
   // Fetch all awards data from the API
   useEffect(() => {
-    fetch("http://localhost:8000/api/v1/media/allmedia")
+    fetch("https://reality-demo.onrender.com/api/v1/media/allmedia")
       .then((response) => response.json())
       .then((data) => {
         setAwards(data.media); // Assuming response has 'media' array
@@ -66,7 +66,7 @@ const Awards = () => {
               {/* Displaying the image if it exists */}
               {award.mediaThumbnails && (
                 <img
-                  src={`http://localhost:8000${award.mediaThumbnails}`}
+                  src={`https://reality-demo.onrender.com${award.mediaThumbnails}`}
                   alt={award.title}
                   className="w-full h-64 object-contain rounded-lg mb-4 border border-gray-300"
                 />
@@ -116,7 +116,7 @@ const Awards = () => {
             <h2 className="text-2xl font-bold text-orange-600 mb-4">{selectedAward.title}</h2>
             {selectedAward.mediaThumbnails && (
               <img
-                src={`http://localhost:8000${selectedAward.mediaThumbnails}`}
+                src={`https://reality-demo.onrender.com${selectedAward.mediaThumbnails}`}
                 alt={selectedAward.title}
                 className="w-full h-64 object-cover rounded-lg mb-4 border border-gray-300"
               />

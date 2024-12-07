@@ -17,7 +17,7 @@ const ContactUs = () => {
   useEffect(() => {
     const fetchContactDetails = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/v1/contact/getcontact');
+        const response = await fetch('https://reality-demo.onrender.com/api/v1/contact/getcontact');
         const data = await response.json();
         console.log("data", data);
         setContactDetails(data);
@@ -43,7 +43,7 @@ const ContactUs = () => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const response = await fetch('http://localhost:8000/api/v1/contact/add-enquiry', {
+      const response = await fetch('https://reality-demo.onrender.com/api/v1/contact/add-enquiry', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

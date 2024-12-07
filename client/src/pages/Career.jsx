@@ -16,7 +16,7 @@ const Career = () => {
 
   // Fetch job openings
   useEffect(() => {
-    fetch("http://localhost:8000/api/v1/career/all-job")
+    fetch("https://reality-demo.onrender.com/api/v1/career/all-job")
       .then((response) => response.json())
       .then((data) => setJobs(data))
       .catch((error) => toast.error("Failed to fetch job openings"));
@@ -46,7 +46,7 @@ const Career = () => {
   formDataToSubmit.append("resume", formData.resume); // The file input for resume
 
   // Make a POST request to submit the form data
-  fetch("http://localhost:8000/api/v1/career/career-enquiry", {
+  fetch("https://reality-demo.onrender.com/api/v1/career/career-enquiry", {
     method: "POST",
     body: formDataToSubmit, // Send FormData
   })

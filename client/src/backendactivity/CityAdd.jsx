@@ -9,7 +9,7 @@ const CityManager = () => {
 
   const fetchCities = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/v1/city/cities");
+      const response = await fetch("https://reality-demo.onrender.com/api/v1/city/cities");
       if (!response.ok) throw new Error("Failed to fetch cities");
       const data = await response.json();
       setCities(data.cities);
@@ -21,7 +21,7 @@ const CityManager = () => {
   const addCity = async () => {
     if (!cityName) return alert("City name is required.");
     try {
-      const response = await fetch("http://localhost:8000/api/v1/city/add-city", {
+      const response = await fetch("https://reality-demo.onrender.com/api/v1/city/add-city", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: cityName }),
@@ -37,7 +37,7 @@ const CityManager = () => {
   const addSubcity = async () => {
     if (!subcityName || !selectedCityId) return alert("Subcity name and City ID are required.");
     try {
-      const response = await fetch("http://localhost:8000/api/v1/city/add-subcity", {
+      const response = await fetch("https://reality-demo.onrender.com/api/v1/city/add-subcity", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cityId: selectedCityId, name: subcityName }),
@@ -53,7 +53,7 @@ const CityManager = () => {
 
   const deleteCity = async (cityId) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/v1/city/delete-city/${cityId}`, {
+      const response = await fetch(`https://reality-demo.onrender.com/api/v1/city/delete-city/${cityId}`, {
         method: "DELETE",
       });
       if (!response.ok) throw new Error("Failed to delete city");
@@ -67,7 +67,7 @@ const CityManager = () => {
   const deleteSubcity = async (cityId, subcityId) => {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/city/delete-subcity/${cityId}/${subcityId}`,
+        `https://reality-demo.onrender.com/api/v1/city/delete-subcity/${cityId}/${subcityId}`,
         {
           method: "DELETE",
         }

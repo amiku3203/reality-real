@@ -11,7 +11,7 @@ const Header = () => {
   useEffect(() => {
     const fetchContactDetails = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/v1/contact/getcontact');
+        const response = await fetch('https://reality-demo.onrender.com/api/v1/contact/getcontact');
         const data = await response.json();
         console.log("data", data);
         setContactDetails(data);

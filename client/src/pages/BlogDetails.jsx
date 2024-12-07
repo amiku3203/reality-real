@@ -12,7 +12,7 @@ const BlogDetails = () => {
   useEffect(() => {
     const fetchProjectBySlug = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/v1/blog/${slug}`);
+        const response = await fetch(`https://reality-demo.onrender.com/api/v1/blog/${slug}`);
         const data = await response.json();
         setBlogdata(data.data); // Adjust based on the API response structure
       } catch (error) {
@@ -22,7 +22,7 @@ const BlogDetails = () => {
 
     async function getAllBlogs() {
       try {
-        const BlogsData = await fetch("http://localhost:8000/api/v1/blog/all");
+        const BlogsData = await fetch("https://reality-demo.onrender.com/api/v1/blog/all");
         const actualData = await BlogsData.json();
         setData(actualData.data);
       } catch (error) {
@@ -56,7 +56,7 @@ const BlogDetails = () => {
           >
             {/* Thumbnail */}
             <img
-              src={`http://localhost:8000/projectsAssests/${blogdata?.blogthumbnail?.url}`}
+              src={`https://reality-demo.onrender.com/projectsAssests/${blogdata?.blogthumbnail?.url}`}
               alt={blogdata.title}
               className="w-full h-72 object-contain sm:object-cover rounded-lg shadow-md"
             />

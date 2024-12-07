@@ -7,7 +7,7 @@ const CareerEnquiries = () => {
 
   // Fetch data from the API
   useEffect(() => {
-    fetch('http://localhost:8000/api/v1/career/all-enquiries')
+    fetch('https://reality-demo.onrender.com/api/v1/career/all-enquiries')
       .then((response) => {
         console.log('API Response:', response); // Log the response object to inspect it
         return response.json();
@@ -82,7 +82,7 @@ const CareerEnquiries = () => {
                   <td className="p-3">
                     {/* Download Resume link */}
                     <a
-                      href={`http://localhost:8000/${enquiry.resume}`}
+                      href={`https://reality-demo.onrender.com/${enquiry.resume}`}
                       download={`${enquiry.name}_resume.pdf`} // Ensure the file name is provided with a proper extension
                       className="text-blue-600"
                     >

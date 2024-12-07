@@ -56,7 +56,7 @@ const [propertyshowdropdow, setPropertyshowdropdow] = useState(false);
   const handleLogout = async () => {
     try {
         // Make a request to the backend to log the user out
-        const response = await fetch("http://localhost:8000/api/v1/user/logout", {
+        const response = await fetch("https://reality-demo.onrender.com/api/v1/user/logout", {
             method: "POST",
             credentials: "include", // Ensure the cookie is included in the request
         });

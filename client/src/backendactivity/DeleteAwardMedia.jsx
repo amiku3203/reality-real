@@ -19,7 +19,7 @@ const Awards = () => {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const response = await fetch("http://localhost:8000/api/v1/media/allmedia");
+            const response = await fetch("https://reality-demo.onrender.com/api/v1/media/allmedia");
             const data = await response.json();
             setAwards(data.media);
         } catch (error) {
@@ -30,7 +30,7 @@ const Awards = () => {
 
     const handleDelete = async (id) => {
         try {
-            await fetch(`http://localhost:8000/api/v1/media/deleteMedia/${id}`, {
+            await fetch(`https://reality-demo.onrender.com/api/v1/media/deleteMedia/${id}`, {
                 method: "DELETE",
             });
             setAwards(awards.filter((award) => award._id !== id));
@@ -42,7 +42,7 @@ const Awards = () => {
     const handleEditClick = (award) => {
         setEditingAward(award);
         setEditForm({ title: award.title, description: award.description, mediaThumbnail: null });
-        setPreviewImage(award.mediaThumbnails ? `http://localhost:8000${award.mediaThumbnails}` : null);
+        setPreviewImage(award.mediaThumbnails ? `https://reality-demo.onrender.com${award.mediaThumbnails}` : null);
     };
 
     const handleImageChange = (e) => {
@@ -62,7 +62,7 @@ const Awards = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:8000/api/v1/media/editMedia/${editingAward._id}`, {
+            const response = await fetch(`https://reality-demo.onrender.com/api/v1/media/editMedia/${editingAward._id}`, {
                 method: "PUT",
                 body: formData,
             });
@@ -97,7 +97,7 @@ const Awards = () => {
                         whileHover={{ scale: 1.05 }}
                     >
                         <img
-                            src={`http://localhost:8000${award.mediaThumbnails}`}
+                            src={`https://reality-demo.onrender.com${award.mediaThumbnails}`}
                             alt={award.title}
                             className="w-full h-64 object-cover rounded-lg mb-4"
                         />

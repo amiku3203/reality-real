@@ -27,7 +27,7 @@ const ProjectsDetails = () => {
   useEffect(() => {
     const fetchProjectBySlug = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/v1/project/${slug}`);
+        const response = await fetch(`https://reality-demo.onrender.com/api/v1/project/${slug}`);
         const data = await response.json();
         console.log("PROJECT_DETAILS",data);
         setProjects(data); // Adjust based on the API response structure
@@ -155,7 +155,7 @@ const ProjectsDetails = () => {
   {/* Property Image */}
   <div className="relative mb-6">
     <img 
-       src={`http://localhost:8000/${projects1.thumbnail}`} // Replace with actual image source
+       src={`https://reality-demo.onrender.com/${projects1.thumbnail}`} // Replace with actual image source
       alt="Property Image"
       className="w-full h-64 object-cover rounded-lg shadow-md transition-transform transform hover:scale-105 duration-500"
     />
@@ -290,7 +290,7 @@ const ProjectsDetails = () => {
     {/* Floor Plan Image */}
     <div className="relative mb-6">
       <img 
-         src={`http://localhost:8000/${projects1?.floorPlan?.thumbnail}`} // Replace with actual floor plan image
+         src={`https://reality-demo.onrender.com/${projects1?.floorPlan?.thumbnail}`} // Replace with actual floor plan image
         alt="Floor Plan"
         className="w-full h-64 object-cover rounded-lg shadow-lg hover:scale-105 transition-transform duration-500"
       />
@@ -386,7 +386,7 @@ const ProjectsDetails = () => {
     {projects1?.Gallery?.map((image, index) => (
       <div key={index} className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
         <img
-          src={`http://localhost:8000/${image?.path}`} // Replace with actual image path
+          src={`https://reality-demo.onrender.com/${image?.path}`} // Replace with actual image path
           alt={`Property Image ${index + 1}`}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
@@ -632,7 +632,7 @@ const ProjectsDetails = () => {
   {/* Builder Image */}
   <div className="relative mb-6">
     <img 
-       src={`http://localhost:8000/${projects1?.AboutTheBuilder?.thumbnail}`} // Replace with builder's image
+       src={`https://reality-demo.onrender.com/${projects1?.AboutTheBuilder?.thumbnail}`} // Replace with builder's image
       alt="Builder"
       className="w-full h-64 object-cover rounded-lg shadow-lg"
     />

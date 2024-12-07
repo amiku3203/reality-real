@@ -12,7 +12,7 @@ const TrendingProjects = () => {
     const fetchProjects = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/api/v1/project/getAllProjects"
+          "https://reality-demo.onrender.com/api/v1/project/getAllProjects"
         );
         const data = await response.json();
         console.log(data); // Debug API response
@@ -65,7 +65,7 @@ const TrendingProjects = () => {
                 >
                   <div className="min-w-full lg:min-w-0 bg-white shadow-lg rounded-md overflow-hidden hover:shadow-2xl transition-shadow h-full">
                     <img
-                      src={`http://localhost:8000/${project.thumbnail}`} // Ensure API provides image URLs
+                      src={`https://reality-demo.onrender.com/${project.thumbnail}`} // Ensure API provides image URLs
                       alt={project.name}
                       className="h-48 w-full object-cover"
                     />

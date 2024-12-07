@@ -12,7 +12,7 @@ const WhatWeDo = () => {
   useEffect(() => {
     const fetchWhatWeDo = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/v1/about');
+        const response = await fetch('https://reality-demo.onrender.com/api/v1/about');
         const data = await response.json();
         if (response.ok) {
           setWhatWeDo(data.data[0]); // Assuming there's only one document
@@ -32,7 +32,7 @@ const WhatWeDo = () => {
   const handleDelete = async (serviceId) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this service?");
     if (confirmDelete) {
-      const response = await fetch(`http://localhost:8000/api/v1/about/service/delete/${serviceId}`, {
+      const response = await fetch(`https://reality-demo.onrender.com/api/v1/about/service/delete/${serviceId}`, {
         method: 'DELETE',
       });
 
@@ -54,7 +54,7 @@ const WhatWeDo = () => {
   };
 
   const handleSaveEdit = async () => {
-    const response = await fetch(`http://localhost:8000/api/v1/about/service/edit/${editingService}`, {
+    const response = await fetch(`https://reality-demo.onrender.com/api/v1/about/service/edit/${editingService}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(editedService),

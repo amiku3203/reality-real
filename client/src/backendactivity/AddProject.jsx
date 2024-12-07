@@ -133,7 +133,7 @@ const CreateProject = () => {
     
     const fetchCities = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/v1/city/cities");
+        const response = await fetch("https://reality-demo.onrender.com/api/v1/city/cities");
         if (!response.ok) throw new Error("Failed to fetch cities");
         const data = await response.json();
         setCities(data.cities);
@@ -247,7 +247,7 @@ const CreateProject = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8000/api/v1/project/createProject",
+        "https://reality-demo.onrender.com/api/v1/project/createProject",
         {
           method: "POST",
           body: form,

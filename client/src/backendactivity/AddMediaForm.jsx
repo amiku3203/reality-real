@@ -27,7 +27,7 @@ const AddMedia = () => {
             form.append("description", formData.description);
             form.append("mediaThumbnail", formData.mediaThumbnail);
 
-            const response = await fetch("http://localhost:8000/api/v1/media/addMedia", {
+            const response = await fetch("https://reality-demo.onrender.com/api/v1/media/addMedia", {
                 method: "POST",
                 body: form,
             });
