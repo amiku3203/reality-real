@@ -6,7 +6,7 @@ const ShowAllProducts = () => {
 
  useEffect(() => {
     async function fetcAllProducts(){
-         const allProducts = await fetch("https://reality-demo.onrender.com/api/v1/project/getAllProjects",
+         const allProducts = await fetch("http://localhost:8000/api/v1/project/getAllProjects",
             {
             method: 'GET',
             }

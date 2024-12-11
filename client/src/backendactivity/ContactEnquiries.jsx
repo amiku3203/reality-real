@@ -9,7 +9,7 @@ const EnquiriesTable = () => {
   useEffect(() => {
     const fetchEnquiries = async () => {
       try {
-        const response = await fetch('https://reality-demo.onrender.com/api/v1/contact/get-enquiries');
+        const response = await fetch('http://localhost:8000/api/v1/contact/get-enquiries');
         const data = await response.json();
 
         if (data.success) {

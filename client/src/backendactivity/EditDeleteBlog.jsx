@@ -16,7 +16,7 @@ const BlogList = () => {
 
   useEffect(() => {
     async function getAllBlogs() {
-      const BlogsData = await fetch("https://reality-demo.onrender.com/api/v1/blog/all");
+      const BlogsData = await fetch("http://localhost:8000/api/v1/blog/all");
       const actualData = await BlogsData.json();
       setData(actualData.data);
     }
@@ -26,7 +26,7 @@ const BlogList = () => {
   const handleDelete = async (slug) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this blog?");
     if (confirmDelete) {
-      const response = await fetch(`https://reality-demo.onrender.com/api/v1/blog/delete/${slug}`, {
+      const response = await fetch(`http://localhost:8000/api/v1/blog/delete/${slug}`, {
         method: 'DELETE',
       });
 
@@ -81,7 +81,7 @@ const BlogList = () => {
       formData.append('blogthumbnail', image); // Ensure image is appended if selected
     }
   
-    const response = await fetch(`https://reality-demo.onrender.com/api/v1/blog/edit/${slug}`, {
+    const response = await fetch(`http://localhost:8000/api/v1/blog/edit/${slug}`, {
       method: 'PUT',
       body: formData,
     });
@@ -121,7 +121,7 @@ const BlogList = () => {
             >
               {/* Thumbnail */}
               <img
-                src={`https://reality-demo.onrender.com/projectsAssests/${blog.blogthumbnail.url}`}
+                src={`http://localhost:8000/projectsAssests/${blog.blogthumbnail.url}`}
                 alt={blog.title}
                 className="w-full h-48 object-cover"
               />

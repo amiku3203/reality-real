@@ -139,7 +139,7 @@ const ManageProjects = () => {
     
     const fetchCities = async () => {
       try {
-        const response = await fetch("https://reality-demo.onrender.com/api/v1/city/cities");
+        const response = await fetch("http://localhost:8000/api/v1/city/cities");
         if (!response.ok) throw new Error("Failed to fetch cities");
         const data = await response.json();
         setCities(data.cities);
@@ -263,7 +263,7 @@ const ManageProjects = () => {
   
     try {
       const response = await fetch(
-        `https://reality-demo.onrender.com/api/v1/project/editProduct/${editProject?._id}`, // Update the URL to include the project slug or ID
+        `http://localhost:8000/api/v1/project/editProduct/${editProject?._id}`, // Update the URL to include the project slug or ID
         {
           method: "PUT", // Use PUT method for updating the project
           body: form,
@@ -290,7 +290,7 @@ const ManageProjects = () => {
   useEffect(() => {
     async function fetchAllProjects() {
       try {
-        const response = await fetch("https://reality-demo.onrender.com/api/v1/project/getAllProjects");
+        const response = await fetch("http://localhost:8000/api/v1/project/getAllProjects");
         if (Array.isArray(projects) && projects.length > 0) {
           setData(projects);
         } else {
@@ -305,7 +305,7 @@ const ManageProjects = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`https://reality-demo.onrender.com/api/v1/project/deleteProject/${id}`, {
+      const response = await fetch(`http://localhost:8000/api/v1/project/deleteProject/${id}`, {
         method: "DELETE",
       });
 
@@ -328,7 +328,7 @@ const ManageProjects = () => {
   
     const fetchProjectBySlug = async () => {
       try {
-        const response = await fetch(`https://reality-demo.onrender.com/api/v1/project/${slug}`);
+        const response = await fetch(`http://localhost:8000/api/v1/project/${slug}`);
         const data = await response.json();
         setEditProject((prevState) => ({
           ...prevState,

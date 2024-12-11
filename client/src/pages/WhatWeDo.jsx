@@ -10,7 +10,7 @@ const WhatWeDo = () => {
   useEffect(() => {
     const fetchWhatWeDo = async () => {
       try {
-        const response = await fetch('https://reality-demo.onrender.com/api/v1/about');
+        const response = await fetch('http://localhost:8000/api/v1/about');
         const data = await response.json();
         if (response.ok) {
           setWhatWeDo(data.data[0]); // Assuming there's only one document

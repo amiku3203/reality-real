@@ -20,7 +20,7 @@ const Home = () => {
     // Fetch Cities from API
     const fetchCities = async () => {
       try {
-        const response = await fetch("https://reality-demo.onrender.com/api/v1/city/cities");
+        const response = await fetch("http://localhost:8000/api/v1/city/cities");
         if (!response.ok) throw new Error("Failed to fetch cities");
         const data = await response.json();
         setCities(data.cities);
@@ -52,7 +52,7 @@ const Home = () => {
 
             
             // Make the fetch request to the backend API
-            const response = await fetch(`https://reality-demo.onrender.com/api/v1/project/search?${query.toString()}`);
+            const response = await fetch(`http://localhost:8000/api/v1/project/search?${query.toString()}`);
             console.log("response", response);
             if (!response.ok) {
                 throw new Error("Failed to fetch search results");

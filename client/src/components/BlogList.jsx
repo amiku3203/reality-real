@@ -23,7 +23,7 @@ const [data, setData] = useState([]);
 
  useEffect(() => {
    async function getAllBlogs(){
-    const BlogsData= await fetch("https://reality-demo.onrender.com/api/v1/blog/all");
+    const BlogsData= await fetch("http://localhost:8000/api/v1/blog/all");
     const actualData= await BlogsData.json();
     console.log("actualData",actualData);
     setData(actualData.data);
@@ -70,7 +70,7 @@ const [data, setData] = useState([]);
             >
               {/* Thumbnail */}
               <img
-                src={`https://reality-demo.onrender.com/projectsAssests/${blog.blogthumbnail.url}`}
+                src={`http://localhost:8000/projectsAssests/${blog.blogthumbnail.url}`}
                 alt={blog.title}
                 className="w-full h-48 object-cover"
               />

@@ -42,7 +42,7 @@ const AddBlogForm = () => {
         formDataToSubmit.append('metakeywords', formData.metakeywords);
     
         try {
-          const response = await fetch('https://reality-demo.onrender.com/api/v1/blog/create', {
+          const response = await fetch('http://localhost:8000/api/v1/blog/create', {
             method: 'POST',
             body: formDataToSubmit,
           });

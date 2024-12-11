@@ -1,4 +1,4 @@
-const backendDomin = "https://reality-demo.onrender.com"
+const backendDomin = "http://localhost:8000"
  
 const SummaryApi = {
     signUP : {

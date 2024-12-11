@@ -23,6 +23,8 @@ const carrerRoutes= require("./routes/carrer");
 const contactRoutes= require("./routes/contact");
 
 const cityRoutes= require("./routes/city");
+
+const downloadRoutes= require("./routes/download");
 const path = require("path");
 
 const express= require("express");
@@ -52,6 +54,7 @@ app.use("/api/v1/media",  mediaRoutes);
 app.use("/api/v1/career",  carrerRoutes);
 app.use("/api/v1/contact", contactRoutes);
 app.use("/api/v1/city", cityRoutes);
+app.use("/download", downloadRoutes);
 const port= process.env.PORT || 2100
 app.use(express.static(path.join(__dirname, './dist')));
 

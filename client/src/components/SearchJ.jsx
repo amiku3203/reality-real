@@ -23,7 +23,7 @@ const SearchContent = ({ projects }) => {
             >
               <div className="min-w-full lg:min-w-0 bg-white shadow-lg rounded-md overflow-hidden hover:shadow-2xl transition-shadow h-full">
                 <img
-                  src={`https://reality-demo.onrender.com/${project.thumbnail}`}
+                  src={`http://localhost:8000/${project.thumbnail}`}
                   alt={project.name}
                   className="h-48 w-full object-cover"
                 />

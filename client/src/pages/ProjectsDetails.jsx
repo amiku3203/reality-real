@@ -21,13 +21,14 @@ const ProjectsDetails = () => {
   const [open, setOpen] = useState(null);
   const {slug} = useParams();
   const [projects1, setProjects] = useState('');
+  const [projects, setProjects1] = useState([]);
   const scrollToSection = (ref) => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
   useEffect(() => {
     const fetchProjectBySlug = async () => {
       try {
-        const response = await fetch(`https://reality-demo.onrender.com/api/v1/project/${slug}`);
+        const response = await fetch(`http://localhost:8000/api/v1/project/${slug}`);
         const data = await response.json();
         console.log("PROJECT_DETAILS",data);
         setProjects(data); // Adjust based on the API response structure
@@ -46,6 +47,24 @@ const ProjectsDetails = () => {
   };
 
    
+  useEffect(() => { 
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8000/api/v1/project/getAllProjects"
+        );
+        const data = await response.json();
+        const filteredProjects = data.filter(project1 => project1._id !== projects1?._id);
+        setProjects1( filteredProjects || []);
+        
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
 
    
   
@@ -155,7 +174,7 @@ const ProjectsDetails = () => {
   {/* Property Image */}
   <div className="relative mb-6">
     <img 
-       src={`https://reality-demo.onrender.com/${projects1.thumbnail}`} // Replace with actual image source
+       src={`http://localhost:8000/${projects1.thumbnail}`} // Replace with actual image source
       alt="Property Image"
       className="w-full h-64 object-cover rounded-lg shadow-md transition-transform transform hover:scale-105 duration-500"
     />
@@ -203,11 +222,52 @@ const ProjectsDetails = () => {
           Map
         </button>
         <button
-          onClick={() => scrollToSection(downloadRef)}
-          className="px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-all duration-300 h-12 w-full text-ellipsis whitespace-nowrap"
-        >
-          Download
-        </button>
+  onClick={async () => {
+    const fileName = projects1?.Brochure; 
+   
+    // if (!extractedFileName) {
+    //   alert('No file available to download.');
+    //   return;
+    // }
+
+    try {
+      // API endpoint to fetch the file
+      const response = await fetch(`http://localhost:8000/download/${fileName}`);
+     console.log("RESPONSE", response);
+      if (!response.ok) {
+        throw new Error('Failed to fetch the file.');
+      }
+
+      // Create a Blob from the response
+      const blob = await response.blob();
+
+      // Create a temporary URL for the Blob
+      const url = window.URL.createObjectURL(blob);
+
+      // Create a temporary link to trigger the download
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'Brochure.pdf'); // Rename the downloaded file
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // Revoke the temporary URL to free memory
+      window.URL.revokeObjectURL(url);
+
+      scrollToSection(downloadRef); // Optional scrolling function
+    } catch (error) {
+      console.error('Error downloading file:', error);
+      alert('An error occurred while downloading the file.');
+    }
+  }}
+  className="px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-all duration-300 h-12 w-full text-ellipsis whitespace-nowrap"
+>
+  Download
+</button>
+
+
+
 
  
 
@@ -290,7 +350,7 @@ const ProjectsDetails = () => {
     {/* Floor Plan Image */}
     <div className="relative mb-6">
       <img 
-         src={`https://reality-demo.onrender.com/${projects1?.floorPlan?.thumbnail}`} // Replace with actual floor plan image
+         src={`http://localhost:8000/${projects1?.floorPlan?.thumbnail}`} // Replace with actual floor plan image
         alt="Floor Plan"
         className="w-full h-64 object-cover rounded-lg shadow-lg hover:scale-105 transition-transform duration-500"
       />
@@ -386,7 +446,7 @@ const ProjectsDetails = () => {
     {projects1?.Gallery?.map((image, index) => (
       <div key={index} className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
         <img
-          src={`https://reality-demo.onrender.com/${image?.path}`} // Replace with actual image path
+          src={`http://localhost:8000/${image?.path}`} // Replace with actual image path
           alt={`Property Image ${index + 1}`}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
@@ -583,45 +643,56 @@ const ProjectsDetails = () => {
 
   {/* Related Projects Section */}
   <div className="mt-12">
-    <h3 className="text-2xl font-bold text-center text-gray-900 mb-6">Related Projects</h3>
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-6">
-      {/* Project 1 */}
-      <div className="bg-white shadow-xl rounded-lg overflow-hidden">
-        <img src= "https://images.pexels.com/photos/8143671/pexels-photo-8143671.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Project 1" className="w-full h-48 object-cover" />
-        <div className="p-4">
-          <h4 className="text-lg font-semibold text-gray-800"> Books by amit shop </h4>
-          <p className="text-sm text-gray-500">Published on: 01/01/2024</p>
-        </div>
-      </div>
+      <h3 className="text-2xl font-bold text-center text-gray-900 mb-6">Related Projects</h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-6">
+        {projects.map((project) => (
 
-      {/* Project 2 */}
-      <div className="bg-white shadow-xl rounded-lg overflow-hidden">
-        <img src="https://images.pexels.com/photos/8134850/pexels-photo-8134850.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Project 2" className="w-full h-48 object-cover" />
-        <div className="p-4">
-          <h4 className="text-lg font-semibold text-gray-800"> Beer by amit shop</h4>
-          <p className="text-sm text-gray-500">Published on: 02/01/2024</p>
-        </div>
-      </div>
-
-      {/* Project 3 */}
-      <div className="bg-white shadow-xl rounded-lg overflow-hidden">
-        <img src="https://images.pexels.com/photos/7031595/pexels-photo-7031595.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Project 3" className="w-full h-48 object-cover" />
-        <div className="p-4">
-          <h4 className="text-lg font-semibold text-gray-800"> Wine By Amit Shop </h4>
-          <p className="text-sm text-gray-500">Published on: 03/01/2024</p>
-        </div>
-      </div>
-
-      {/* Project 4 */}
-      <div className="bg-white shadow-xl rounded-lg overflow-hidden">
-        <img src="https://images.pexels.com/photos/7031594/pexels-photo-7031594.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Project 4" className="w-full h-48 object-cover" />
-        <div className="p-4">
-          <h4 className="text-lg font-semibold text-gray-800">lux cozy by amit shop</h4>
-          <p className="text-sm text-gray-500">Published on: 04/01/2024</p>
-        </div>
+          
+          <div key={project.id} className="bg-white shadow-xl rounded-lg overflow-hidden">
+              <Link
+                  to={`/properties/${project.slug}`} // Ensure your details page handles project IDs
+                  key={project.id}
+                  className="flex-shrink-0 w-full lg:w-auto"
+                >
+            <img
+               src={`http://localhost:8000/${project.thumbnail}`} 
+              alt={project.title}
+              className="w-full h-48 object-cover"
+            />
+            <div className="p-4">
+              <h4 className="text-lg font-semibold text-gray-800">{project.ProjectName}</h4>
+      <div className="mt-6 bg-gray-50 p-6 rounded-lg shadow-inner" >
+            <h3 className="text-xl font-semibold text-gray-800 mb-4">Quick Summary</h3>
+            <table className="w-full text-left text-gray-700">
+              <tbody>
+                <tr className="border-b">
+                  <th className="py-2 font-semibold">Property Category:</th>
+                  <td className="py-2"> {project.PropertyCategory}</td>
+                </tr>
+                 
+                <tr className="border-b">
+                  <th className="py-2 font-semibold">Typology:</th>
+                  <td className="py-2">{project?.ProjectTypology}</td>
+                </tr>
+                <tr className="border-b">
+                  <th className="py-2 font-semibold">Property Status:</th>
+                  <td className="py-2">{project?.ProjectStatus}</td>
+                </tr>
+                <tr className="border-b">
+                  <th className="py-2 font-semibold">Property Type:</th>
+                  <td className="py-2"> {project?.PropertyType
+                  }</td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+            </div>
+            </Link>
+          </div>
+        ))}
       </div>
     </div>
-  </div>
 </div>
 
       </div>
@@ -632,7 +703,7 @@ const ProjectsDetails = () => {
   {/* Builder Image */}
   <div className="relative mb-6">
     <img 
-       src={`https://reality-demo.onrender.com/${projects1?.AboutTheBuilder?.thumbnail}`} // Replace with builder's image
+       src={`http://localhost:8000/${projects1?.AboutTheBuilder?.thumbnail}`} // Replace with builder's image
       alt="Builder"
       className="w-full h-64 object-cover rounded-lg shadow-lg"
     />

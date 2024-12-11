@@ -10,7 +10,7 @@ const Testimonials = () => {
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
-        const response = await fetch("https://reality-demo.onrender.com/api/v1/testimonials/all");
+        const response = await fetch("http://localhost:8000/api/v1/testimonials/all");
         const data = await response.json();
 
         if (response.ok) {

@@ -17,7 +17,7 @@ import { useDispatch } from 'react-redux';
 import { setUserDetails } from './store/userSlice.jsx';
 import Context from './context';
 import SummaryApi from './common.jsx';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Admin from './admin/Admin.jsx';
 import SignIn from './backendactivity/SignIn.jsx';
 import WhatWeDo from './pages/WhatWeDo.jsx';
@@ -25,7 +25,8 @@ import Awards from './pages/Awards.jsx';
 import Career from './pages/Career.jsx';
 import ContactUs from './pages/Contact.jsx';
  
- 
+import Chatbot from "./components/Chatbot.jsx";
+import FloatingChatButton from "./components/FloatingComponent.jsx";
 // import { setUserDetails } from './store/userSlice';
 
 
@@ -33,7 +34,11 @@ import ContactUs from './pages/Contact.jsx';
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
+  const [isChatbotOpen, setChatbotOpen] = useState(false);
 
+  const toggleChatbot = () => {
+      setChatbotOpen((prev) => !prev);
+  };
   // Check if the current path includes "admin"
   const isAdminRoute = location.pathname.includes('admin');
   const fetchUserDetails = async () => {
@@ -61,9 +66,14 @@ function App() {
          
         }}
       >
+        
       { !isAdminRoute &&  <Header/>  }
+      <FloatingChatButton toggleChatbot={toggleChatbot} />
+            <Chatbot isOpen={isChatbotOpen} toggleChatbot={toggleChatbot} />
        <Routes>
+        
         <Route path="/" element={ <Home/> } />
+
         <Route path="/property" element={ <ProjectGallery/> } />
         <Route  path="/properties/:slug" element={<ProjectDetailsPage/>}/>
         <Route  path="/disclaimer" element={<Disclaimer/>}  />

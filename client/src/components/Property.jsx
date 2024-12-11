@@ -51,7 +51,7 @@ const Property = () => {
     const fetchProjects = async () => {
       try {
         const response = await fetch(
-          "https://reality-demo.onrender.com/api/v1/project/getAllProjects"
+          "http://localhost:8000/api/v1/project/getAllProjects"
         );
         const data = await response.json();
         setProjects(data || []);
@@ -68,7 +68,7 @@ const Property = () => {
   useEffect(() => {
     const fetchCities = async () => {
       try {
-        const response = await fetch("https://reality-demo.onrender.com/api/v1/city/cities");
+        const response = await fetch("http://localhost:8000/api/v1/city/cities");
         if (!response.ok) throw new Error("Failed to fetch cities");
         const data = await response.json();
         setCities(data.cities);
@@ -253,7 +253,7 @@ const Property = () => {
             >
               <div className="relative">
                 <img
-                  src={`https://reality-demo.onrender.com/${project.thumbnail}`}
+                  src={`http://localhost:8000/${project.thumbnail}`}
                   alt={project.name}
                   className="h-48 w-full object-cover"
                 />

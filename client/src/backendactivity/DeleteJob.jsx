@@ -16,7 +16,7 @@ const EditJob = () => {
 
     const fetchJobs = async () => {
         try {
-            const response = await fetch("https://reality-demo.onrender.com/api/v1/career/all-job");
+            const response = await fetch("http://localhost:8000/api/v1/career/all-job");
             const data = await response.json();
             setJobs(data.jobs);
         } catch (error) {
@@ -26,7 +26,7 @@ const EditJob = () => {
 
     const handleDelete = async (id) => {
         try {
-            const response = await fetch(`https://reality-demo.onrender.com/api/v1/career/delete-job/${id}`, {
+            const response = await fetch(`http://localhost:8000/api/v1/career/delete-job/${id}`, {
                 method: "DELETE",
             });
             const result = await response.json();
@@ -53,7 +53,7 @@ const EditJob = () => {
 
     const handleSaveEdit = async () => {
         try {
-            const response = await fetch(`https://reality-demo.onrender.com/api/v1/career/edit-job/${editingJob}`, {
+            const response = await fetch(`http://localhost:8000/api/v1/career/edit-job/${editingJob}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(form),
